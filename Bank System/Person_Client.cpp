@@ -22,10 +22,10 @@ public:
     int getId() const {
         return id;
     }
-    string getNname() const {
+    string getNname() {
         return name;
     }
-    string getPassword() const {
+    string getPassword() {
         return password;
     }
     void setId(int id) {
