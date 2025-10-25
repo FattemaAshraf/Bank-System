@@ -22,7 +22,7 @@ public:
     int getId() {
         return id;
     }
-    string getNname() {
+    string getName() {
         return name;
     }
     string getPassword() {
@@ -60,7 +60,7 @@ public:
         }
     }
     void withdraw(double amount) {
-        if (balance > amount) {
+        if (balance >= amount) {
             balance -= amount;
         }
         else {
@@ -68,7 +68,7 @@ public:
         }
     }
     void transferTo(double amount, Client& recipient) {
-        if (balance > amount) {
+        if (balance >= amount) {
             balance -= amount;
             recipient.deposit(amount);
             cout << "=====transfered successfuly=====\n" << endl;
