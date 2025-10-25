@@ -19,7 +19,7 @@ public:
         this->name = name;
         this->password = password;
     }
-    int getId() const {
+    int getId() {
         return id;
     }
     string getNname() {
