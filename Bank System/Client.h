@@ -7,12 +7,28 @@ public:
     Client() {
         balance = 1500.0;
     }
-    Client(int id, string name, string password, double balance) :Person(id, name, password), balance(balance) {}
+    Client(int id, string name, string password, double balance) :Person(id, name, password) {
+        try {
+            Validation::validateBalance(balance);
+            this->balance = balance;
+        }
+        catch (const invalid_argument& e) {
+            cout << "Error in constructor: " << e.what() << endl;
+            cout << "Setting balance to minimum (1500 EGP)" << endl;
+            this->balance = 1500.0;
+        }
+    }
     double getBalance() {
         return balance;
     }
     void setBalance(double balance) {
-        this->balance = balance;
+        try {
+            Validation::validateBalance(balance);
+            this->balance = balance;
+        }
+        catch (const invalid_argument& e) {
+            cout << "Error: " << e.what() << endl;
+        }
     }
     void deposit(double amount) {
         if (amount > 0) {

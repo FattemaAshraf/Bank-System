@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <stdexcept>
+#include "Validation.h"
 using namespace std;
 
 class Person {
@@ -33,33 +35,26 @@ public:
         this->id = id;
     }
     bool setName(const string& name) {
-        if (name.length() < 3 || name.length() > 20) {
-            cout << "name must be between 3 and 20 characters" << endl;
+        try {
+            Validation::validateName(name);
+            this->name = name;
+            return true;
+        }
+        catch (const invalid_argument& e) {
+            cout << "Error: " << e.what() << endl;
             return false;
         }
-        for (int i = 0; i < name.length(); i++) {
-            char c = name[i];
-            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == ' '))) {
-                cout << "write letters only" << endl;
-                return false;
-            }
-        }
-        this->name = name;
-        return true;
     }
     bool setPassword(const string& password) {
-        if (password.length() < 8 || password.length() > 20) {
-            cout << "password must be 8 to 20 characters" << endl;
+        try {
+            Validation::validatePassword(password);
+            this->password = password;
+            return true;
+        }
+        catch (const invalid_argument& e) {
+            cout << "Error: " << e.what() << endl;
             return false;
         }
-        for (int i = 0; i < password.length(); i++) {
-            if (password[i] == ' ') {
-                cout << "write password without spaces" << endl;
-                return false;
-            }
-        }
-        this->password = password;
-        return true;
     }
 };
 
