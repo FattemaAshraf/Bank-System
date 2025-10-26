@@ -31,12 +31,35 @@ public:
     void setId(int id) {
         this->id = id;
     }
-    void setName(string name) {
-        this->name = name;
+    bool setName(const string& name) {
+    if (name.length() < 3 || name.length() > 20) {
+        cout << "name must be between 3 and 20 characters" << endl;
+        return false;
     }
-    void setPassword(string password) {
-        this->password = password;
+    for (int i = 0; i < name.length(); i++) {
+        char c = name[i];
+        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == ' '))) {
+            cout << "write letters only" << endl;
+            return false;
+        }
     }
+    this->name = name;
+    return true;
+}
+    bool setPassword(const string& password) {
+     if (password.length() < 8 || password.length() > 20) {
+         cout << "password must be 8 to 20 characters" << endl;
+         return false;
+     }
+     for (int i = 0; i < password.length(); i++) {
+         if (password[i] == ' ') {
+             cout << "write password without spaces" << endl;
+             return false;
+         }
+     }
+     this->password = password;
+     return true;
+ }
 };
 class Client : public Person {
     double balance;
@@ -93,6 +116,11 @@ int main()
     Client a1(2, "Ali", "123", 200);
     Client a2(3, "Sama", "111", 100);
 
+/*  a1.setPassword("1235 6789");
+  a1.getPassword();
+  a2.setName("sama ali");
+  cout << a2.getName() << endl;*/
+    
     a1.deposit(300);//500
     a1.withdraw(200);//300
     a1.transferTo(50, a2);//a1-> 250, a1-> 150
