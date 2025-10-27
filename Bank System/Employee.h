@@ -36,7 +36,7 @@ public:
         return salary;
     }
 
-    void display() {
+    virtual void display() {
         cout << "========== Employee Information ==========" << endl;
         cout << "ID: " << getId() << endl;
         cout << "Name: " << getName() << endl;
