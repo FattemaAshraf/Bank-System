@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/AGENTS.md
+/.idea/runConfigurations/all.xml
+/.idea/aws.xml
+/Bank System Final Project.docx.pdf
+/.idea/Bank-System.iml
+/BankSystem
+/CLAUDE.md
+/CMakeLists.txt
+/.idea/editor.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
