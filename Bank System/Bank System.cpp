@@ -5,6 +5,7 @@
 #include "Validation.h"
 #include "Client.h"
 #include "Parser.h"
+#include "FilesHelper.h"
 using namespace std;
 
 int main() {
@@ -162,6 +163,7 @@ int main() {
         Client client = Parser::parseToClient(clientData);
         cout << "Parsed Client:" << endl;
         client.display();
+        FilesHelper::saveClient(client);
     }
     catch (const exception& e) {
         cout << "Error: " << e.what() << endl;
