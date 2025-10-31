@@ -61,5 +61,71 @@ public:
 			<< ",password:" << e.getPassword() << ",salary:" << e.getSalary() << endl;
 		file.close();
 	}
+
+	// methods e, f, g, h >>
+
+	static void getClients() {
+		ifstream file("Clients.txt");
+		if (!file.is_open()) {
+			cerr << "error: could not open Clients.txt" << endl;
+			return;
+		}
+		string line;
+		cout << "\n--- Clients List ---\n";
+		while (getline(file, line)) {
+			cout << line << endl;
+		}
+		file.close();
+		cout << "--------------------\n";
+	}
+
+	static void getEmployees() {
+		ifstream file("Employees.txt");
+		if (!file.is_open()) {
+			cerr << "error: could not open Employees.txt" << endl;
+			return;
+		}
+		string line;
+		cout << "\n--- Employees List ---\n";
+		while (getline(file, line)) {
+			cout << line << endl;
+		}
+		file.close();
+		cout << "----------------------\n";
+	}
+
+	static void getAdmins() {
+		ifstream file("Admins.txt");
+		if (!file.is_open()) {
+			cerr << "error: Could not open Admins.txt" << endl;
+			return;
+		}
+		string line;
+		cout << "\n--- Admins List ---\n";
+		while (getline(file, line)) {
+			cout << line << endl;
+		}
+		file.close();
+		cout << "-------------------\n";
+	}
+
+	static void clearFile(string fileName, string lastIdFile) {
+		ofstream file(fileName, ios::out);
+		if (!file.is_open()) {
+			cerr << "error: Could not clear " << fileName << endl;
+			return;
+		}
+		file.close();
+
+		ofstream lastFile(lastIdFile, ios::out);
+		if (!lastFile.is_open()) {
+			cerr << "error: Could not reset " << lastIdFile << endl;
+			return;
+		}
+		lastFile << "0";
+		lastFile.close();
+
+		cout << "Cleared files: " << fileName << " and reset: " << lastIdFile << endl;
+	}
 };
  
