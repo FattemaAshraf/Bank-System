@@ -26,35 +26,36 @@ public:
     }
 
     void addAdmin(Admin &obj) override {
-        FilesHelper::saveEmployee(obj);
+        FilesHelper::saveAdmin(obj);
     }
 
-     vector<Client> getClients() override {
+     vector<Client> getAllClients() override {
         return FilesHelper::getClients();
     }
 
 
     
-    vector<Employee> getEmployees() {
+    vector<Employee> getAllEmployees() {
         vector<Employee> employees = FilesHelper::getEmployees();
         return employees;
     }
   
 
-   vector<Admin> getAdmins()override {
-    
+   vector<Admin> getAllAdmins()override {
+       vector<Admin> admins = FilesHelper::getAdmins();
+ 
         return admins;
     }
 
     void removeAllClients() {
-   /*     FilesHelper::clearFile(CLIENTS_FILE, CLIENT_LAST_ID_FILE);*/
+      FilesHelper::clearFile(CLIENTS_FILE, CLIENT_LAST_ID_FILE);
     }
 
     void removeAllEmployees() {
-        //F/*ilesHelper::clearFile(EMPLOYEES_FILE, EMPLOYEE_LAST_ID_FILE);*/
+        FilesHelper::clearFile(EMPLOYEES_FILE, EMPLOYEE_LAST_ID_FILE);
     }
 
     void removeAllAdmins()  {
-      /*  FilesHelper::clearFile(ADMINS_FILE, ADMIN_LAST_ID_FILE);*/
+       FilesHelper::clearFile(ADMINS_FILE, ADMIN_LAST_ID_FILE);
     }
 };

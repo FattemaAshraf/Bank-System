@@ -154,6 +154,8 @@
     <ResourceCompile Include="Bank System.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\Admins.txt" />
+    <Text Include="Admins.txt" />
     <Text Include="Clients.txt" />
     <Text Include="Employees.txt" />
   </ItemGroup>

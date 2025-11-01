@@ -30,7 +30,7 @@ public:
 		file.close();
 	}
 	static int getLast(string fileName) {
-		ifstream  file(fileName, ios::app);
+		ifstream  file(fileName, ios::in);
 		if (!file.is_open()) {
 			cerr << "Error: Could not open " << fileName << endl;
 			return 0;
@@ -62,7 +62,16 @@ public:
 			<< ",password:" << e.getPassword() << ",salary:" << e.getSalary() << endl;
 		file.close();
 	}
-
+	static void saveAdmin(Admin a) {
+		ofstream file("Admins.txt", ios::app);
+		if (!file.is_open()) {
+			cerr << "Error: Could not open Admins.txt" << endl;
+			return;
+		}
+		file << "id:" << a.getId() << ",name:" << a.getName()
+			<< ",password:" << a.getPassword() << ",salary:" << a.getSalary() << endl;
+		file.close();
+	}
 // methods (e, f, g, h) >> 
 
 //client
@@ -114,5 +123,23 @@ static vector<Admin> getAdmins() {
     }
     file.close();
     return admins;
+}
+static void clearFile(string fileName, string lastIdFile) {
+	ofstream file(fileName, ios::out);
+	if (!file.is_open()) {
+		cerr << "error: Could not clear " << fileName << endl;
+		return;
+	}
+	file.close();
+
+	ofstream lastFile(lastIdFile, ios::out);
+	if (!lastFile.is_open()) {
+		cerr << "error: Could not reset " << lastIdFile << endl;
+		return;
+	}
+	lastFile << "0";
+	lastFile.close();
+
+	cout << "Cleared files: " << fileName << " and reset: " << lastIdFile << endl;
 }
 };
