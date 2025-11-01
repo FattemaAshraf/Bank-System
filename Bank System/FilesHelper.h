@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include "Employee.h"
+#include "Parser.h"
 using namespace std;
  
 
@@ -62,70 +63,56 @@ public:
 		file.close();
 	}
 
-	// methods e, f, g, h >>
+// methods (e, f, g, h) >> 
 
-	static void getClients() {
-		ifstream file("Clients.txt");
-		if (!file.is_open()) {
-			cerr << "error: could not open Clients.txt" << endl;
-			return;
-		}
-		string line;
-		cout << "\n--- Clients List ---\n";
-		while (getline(file, line)) {
-			cout << line << endl;
-		}
-		file.close();
-		cout << "--------------------\n";
-	}
+//client
+static vector<Client> getClients() {
+    vector<Client> clients;
+    ifstream file("Clients.txt");
+    if (!file.is_open()) {
+        cerr << "Error: Could not open Clients.txt" << endl;
+        return clients;
+    }
 
-	static void getEmployees() {
-		ifstream file("Employees.txt");
-		if (!file.is_open()) {
-			cerr << "error: could not open Employees.txt" << endl;
-			return;
-		}
-		string line;
-		cout << "\n--- Employees List ---\n";
-		while (getline(file, line)) {
-			cout << line << endl;
-		}
-		file.close();
-		cout << "----------------------\n";
-	}
+    string line;
+    while (getline(file, line)) {
+        clients.push_back(Parser::parseToClient(line));
+    }
+    file.close();
+    return clients;
+}
 
-	static void getAdmins() {
-		ifstream file("Admins.txt");
-		if (!file.is_open()) {
-			cerr << "error: Could not open Admins.txt" << endl;
-			return;
-		}
-		string line;
-		cout << "\n--- Admins List ---\n";
-		while (getline(file, line)) {
-			cout << line << endl;
-		}
-		file.close();
-		cout << "-------------------\n";
-	}
+//employee
+static vector<Employee> getEmployees() {
+    vector<Employee> employees;
+    ifstream file("Employees.txt");
+    if (!file.is_open()) {
+        cerr << "Error: Could not open Employees.txt" << endl;
+        return employees;
+    }
 
-	static void clearFile(string fileName, string lastIdFile) {
-		ofstream file(fileName, ios::out);
-		if (!file.is_open()) {
-			cerr << "error: Could not clear " << fileName << endl;
-			return;
-		}
-		file.close();
+    string line;
+    while (getline(file, line)) {
+        employees.push_back(Parser::parseToEmployee(line));
+    }
+    file.close();
+    return employees;
+}
 
-		ofstream lastFile(lastIdFile, ios::out);
-		if (!lastFile.is_open()) {
-			cerr << "error: Could not reset " << lastIdFile << endl;
-			return;
-		}
-		lastFile << "0";
-		lastFile.close();
+//admin
+static vector<Admin> getAdmins() {
+    vector<Admin> admins;
+    ifstream file("Admins.txt");
+    if (!file.is_open()) {
+        cerr << "Error: Could not open Admins.txt" << endl;
+        return admins;
+    }
 
-		cout << "Cleared files: " << fileName << " and reset: " << lastIdFile << endl;
-	}
+    string line;
+    while (getline(file, line)) {
+        admins.push_back(Parser::parseToAdmin(line));
+    }
+    file.close();
+    return admins;
+}
 };
- 
