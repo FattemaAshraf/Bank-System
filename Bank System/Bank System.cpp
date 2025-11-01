@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include "Validation.h"
+#include "Client.h"
+#include "Parser.h"
+#include "FilesHelper.h"
 using namespace std;
 
 int main() {
@@ -155,5 +158,15 @@ int main() {
 
     cout << "\n=== All validation tests completed ===\n";
 
+    string clientData = "id:12234,name:fatma ashraf,password:223128,balance:8290";
+    try {
+        Client client = Parser::parseToClient(clientData);
+        cout << "Parsed Client:" << endl;
+        client.display();
+        FilesHelper::saveClient(client);
+    }
+    catch (const exception& e) {
+        cout << "Error: " << e.what() << endl;
+    }
     return 0;
 }
