@@ -5,10 +5,6 @@
 CXX = clang++
 CXXFLAGS = -std=c++11 -Wall
 TARGET = BankSystem
-SRC_DIR = Bank\ System
-
-# Source files
-SOURCES = $(SRC_DIR)/Bank\ System.cpp $(SRC_DIR)/Validation.cpp
 
 # Default target - build and run
 all: build run
@@ -16,7 +12,7 @@ all: build run
 # Build the project
 build:
 	@echo "🔨 Building Bank System..."
-	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) "Bank System"/*.cpp -o $(TARGET)
 	@echo "✅ Build complete!"
 
 # Run the program
