@@ -1,8 +1,10 @@
 #pragma once
 #include "Person.h"
+#include <vector>
 
 class Client : public Person {
     double balance;
+    static vector<Client> allClients;
 public:
     Client() {
         balance = 1500.0;
@@ -64,6 +66,10 @@ public:
         cout << "Name: " << name << endl;
         cout << "Balance: " << balance << endl;
     }
+
+    static void addClient(const Client& client);
+    static Client* getClientById(int id);
+    static vector<Client>& getAllClients();
 };
 
 
