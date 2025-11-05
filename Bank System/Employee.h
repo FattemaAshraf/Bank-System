@@ -1,10 +1,13 @@
 #pragma once
 #include "Person.h"
+#include <vector>
+
 class Employee :
     public Person
 {
 protected:
     double salary;
+    static vector<Employee> allEmployees;
 public:
     Employee() : Person() {
         salary = 5000.0;
@@ -48,5 +51,9 @@ public:
     void displayEmp() {
         display();
     }
+
+    static void addEmployee(const Employee& employee);
+    static Employee* getEmpById(int id);
+    static vector<Employee>& getAllEmployees();
 };
 
