@@ -55,5 +55,7 @@ public:
     static void addEmployee(const Employee& employee);
     static Employee* getEmpById(int id);
     static vector<Employee>& getAllEmployees();
+    static void listEmployees();
+    static void editEmployee(int id, string name, string password, double salary);
 };
 
