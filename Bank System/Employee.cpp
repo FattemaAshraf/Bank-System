@@ -1,55 +1,56 @@
 #include "Employee.h"
 
-vector<Employee> Employee::allEmployees;
+vector<Client> Employee::allClients;
 
-void Employee::addEmployee(const Employee& employee) {
-    allEmployees.push_back(employee);
+void Employee::addClient(const Client& client) {
+     
+    allClients.push_back(client);
 }
 
-Employee* Employee::getEmpById(int id) {
-    for (int i = 0; i < allEmployees.size(); i++) {
-        if (allEmployees[i].getId() == id) {
-            return &allEmployees[i];
+Client* Employee::getClientById(int id) {
+    for (int i = 0; i < allClients.size(); i++) {
+        if (allClients[i].getId() == id) {
+            return &allClients[i];
         }
     }
     return nullptr;
 }
 
-vector<Employee>& Employee::getAllEmployees() {
-    return allEmployees;
+vector<Client>& Employee::getAllClients() {
+    return allClients;
 }
 
-void Employee::listEmployees() {
-    if (allEmployees.size() == 0) {
-        cout << "No employees found." << endl;
+void Employee::listClients() {
+    if (allClients.size() == 0) {
+        cout << "No clients found." << endl;
         return;
     }
 
-    cout << "\n===== All Employees =====" << endl;
-    for (int i = 0; i < allEmployees.size(); i++) {
-        allEmployees[i].display();
+    cout << "\n===== All Clients =====" << endl;
+    for (int i = 0; i < allClients.size(); i++) {
+        allClients[i].display();
         cout << "----------------------" << endl;
     }
 }
 
-void Employee::editEmployee(int id, string name, string password, double salary) {
-    Employee* employee = getEmpById(id);
+void Employee::editClient(int id, string name, string password, double balance) {
+    Client* client = getClientById(id);
 
-    if (employee == nullptr) {
-        cout << "Employee not found." << endl;
+    if (client == nullptr) {
+        cout << "Client not found." << endl;
         return;
     }
 
     try {
         Validation::validateName(name);
         Validation::validatePassword(password);
-        Validation::validateSalary(salary);
+        Validation::validateBalance(balance);
 
-        employee->setName(name);
-        employee->setPassword(password);
-        employee->setSalary(salary);
+        client->setName(name);
+        client->setPassword(password);
+        client->setBalance(balance);
 
-        cout << "Employee updated successfully." << endl;
+        cout << "Client updated successfully." << endl;
     }
     catch (const invalid_argument& e) {
         cout << "Error: " << e.what() << endl;

@@ -154,10 +154,12 @@
     <ResourceCompile Include="Bank System.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Admins.txt" />
     <Text Include="Admins.txt" />
+    <Text Include="Admin_Last_ID.txt" />
     <Text Include="Clients.txt" />
+    <Text Include="Client_Last_ID.txt" />
     <Text Include="Employees.txt" />
+    <Text Include="Employee_Last_ID.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

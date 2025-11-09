@@ -1,6 +1,8 @@
 #pragma once
 #include "Employee.h"
 class Admin : public Employee {
+    static vector<Employee> allEmployees;
+
 public:
 
     Admin() : Employee() {}
@@ -9,12 +11,10 @@ public:
         : Employee(id, name, password, salary) {}
 
 
-    void display() override {
-        cout << "========== Admin Information ==========" << endl;
-        cout << "ID: " << getId() << endl;
-        cout << "Name: " << getName() << endl;
-        cout << "Password: " << getPassword() << endl;
-        cout << "Salary: " << getSalary() << " EGP" << endl;
-        cout << "=======================================" << endl;
-    }
+    static void addEmployee(const Employee& employee);
+    static Employee* getEmpById(int id);
+    static vector<Employee>& getAllEmployees();
+    static void listEmployees();
+    static void editEmployee(int id, string name, string password, double salary);
+
 };

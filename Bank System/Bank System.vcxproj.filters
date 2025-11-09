@@ -86,9 +86,9 @@
   <ItemGroup>
     <Text Include="Clients.txt" />
     <Text Include="Employees.txt" />
-    <Text Include="..\Admins.txt">
-      <Filter>Source Files</Filter>
-    </Text>
     <Text Include="Admins.txt" />
+    <Text Include="Client_Last_ID.txt" />
+    <Text Include="Employee_Last_ID.txt" />
+    <Text Include="Admin_Last_ID.txt" />
   </ItemGroup>
 </Project>

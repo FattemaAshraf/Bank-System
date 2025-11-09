@@ -1,13 +1,15 @@
 #pragma once
 #include "Person.h"
 #include <vector>
-
+#include "Client.h"
+ 
 class Employee :
     public Person
 {
 protected:
     double salary;
-    static vector<Employee> allEmployees;
+    static vector<Client> allClients;
+
 public:
     Employee() : Person() {
         salary = 5000.0;
@@ -52,10 +54,10 @@ public:
         display();
     }
 
-    static void addEmployee(const Employee& employee);
-    static Employee* getEmpById(int id);
-    static vector<Employee>& getAllEmployees();
-    static void listEmployees();
-    static void editEmployee(int id, string name, string password, double salary);
+    static void addClient(const Client& client);
+    static Client* getClientById(int id);
+    static vector<Client>& getAllClients();
+    static void listClients();
+    static void editClient(int id, string name, string password, double balance);
 };
 
