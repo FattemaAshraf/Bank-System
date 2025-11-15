@@ -7,9 +7,13 @@
 #include "Parser.h"
 #include "FilesHelper.h"
 #include "FileManager.h"
+#include "EmployeeManager.h"
 using namespace std;
 
 int main() {
+    //_____Phase 3______
+    EmployeeManager::printEmployeeMenu();
+    EmployeeManager::login(1, "Fatma");
     //____Phase 2_____
     cout << "=== Bank System - Admin Testing.... login  ===\n\n";
     Admin admin(1, "Fatma", "789", 600);
