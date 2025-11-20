@@ -12,10 +12,16 @@ using namespace std;
 
 int main() {
     //_____Phase 3______
-    EmployeeManager::printEmployeeMenu();
-    EmployeeManager::login(1, "Fatma");
+    int id;
+    string password;
+    cout << "Id: ";
+    cin >> id;
+    cout << "password: ";
+    cin >> password;
+    EmployeeManager empManger;
+    empManger.login(id,password);
     //____Phase 2_____
-    cout << "=== Bank System - Admin Testing.... login  ===\n\n";
+    /*cout << "=== Bank System - Admin Testing.... login  ===\n\n";
     Admin admin(1, "Fatma", "789", 600);
     Client clnt(2, "Fatma", "789", 6000);
     Employee emp(3, "Fatma", "789", 600);
@@ -31,10 +37,9 @@ int main() {
     cout << "=== Bank System -   Testing FileManger....   ===\n\n";
     FileManager fileManager;
     fileManager.addClient(clnt);
-    fileManager.addEmployee(emp);
+    fileManager.addEmployee(emp);*/
 
-    DataInitializer::initializeData();
-
+ 
     //___Phase 1_____
     //cout << "=== Bank System - Validation Testing ===\n\n";
 

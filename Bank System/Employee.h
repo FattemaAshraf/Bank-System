@@ -1,8 +1,11 @@
 #pragma once
-#include "Person.h"
+#include <iostream>
 #include <vector>
-#include "Client.h"
- 
+#include <string>
+#include <sstream>
+
+using namespace std;
+
 class Employee :
     public Person
 {
@@ -11,53 +14,20 @@ protected:
     static vector<Client> allClients;
 
 public:
-    Employee() : Person() {
-        salary = 5000.0;
-    }
+    Employee();
+    Employee(int id, string name, string password, double salary);
 
-    Employee(int id, string name, string password, double salary) : Person(id, name, password) {
-        try {
-            Validation::validateSalary(salary);
-            this->salary = salary;
-        }
-        catch (const invalid_argument& e) {
-            cout << "Error in constructor: " << e.what() << endl;
-            cout << "Setting salary to minimum (5000 EGP)" << endl;
-            this->salary = 5000.0;
-        }
-    }
+    void setSalary(double s);
+    double getSalary();
 
-    void setSalary(double s) {
-        try {
-            Validation::validateSalary(s);
-            salary = s;
-        }
-        catch (const invalid_argument& e) {
-            cout << "Error: " << e.what() << endl;
-        }
-    }
+    virtual void display();
+    void displayEmp();
 
-    double getSalary() {
-        return salary;
-    }
-
-    virtual void display() {
-        cout << "========== Employee Information ==========" << endl;
-        cout << "ID: " << getId() << endl;
-        cout << "Name: " << getName() << endl;
-        cout << "Password: " << getPassword() << endl;
-        cout << "Salary: " << getSalary() << " EGP" << endl;
-        cout << "==========================================" << endl;
-    }
-
-    void displayEmp() {
-        display();
-    }
-
-    static void addClient(const Client& client);
-    static Client* getClientById(int id);
-    static vector<Client>& getAllClients();
-    static void listClients();
-    static void editClient(int id, string name, string password, double balance);
+    void addClient(const Client& client);
+    Client* getClientById(int id);
+    vector<Client>& getAllClients();
+    void listClients();
+    void editClient(int id, string name, string password, double balance);
+    void updatePassword(int id, string oldPassword, string newPassword);
 };
 
