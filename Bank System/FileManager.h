@@ -59,20 +59,3 @@ public:
        FilesHelper::clearFile(ADMINS_FILE, ADMIN_LAST_ID_FILE);
     }
 };
-class DataInitializer {
-public:
-    static void initializeData() {
-        FileManager fileManager;
-         vector<Client> clients = fileManager.getAllClients();
-        for (auto& client : clients) {
-            Employee::addClient(client);
-        }
-        Employee::listClients();
-         vector<Employee> employees = fileManager.getAllEmployees();
-        for (auto& emp : employees) {
-            Admin::addEmployee(emp);
-        }
-        Admin::listEmployees();
-
-    }
-};

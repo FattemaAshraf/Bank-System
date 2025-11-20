@@ -7,6 +7,7 @@
 #include "Parser.h"
 #include "FilesHelper.h"
 #include "FileManager.h"
+#include "EmployeeManager.h"
 #include "ClientManager.cpp"
 #include "Screen.h"
 using namespace std;
@@ -14,6 +15,33 @@ using namespace std;
 
 
 int main() {
+    //_____Phase 3______
+    int id;
+    string password;
+    cout << "Id: ";
+    cin >> id;
+    cout << "password: ";
+    cin >> password;
+    EmployeeManager empManger;
+    empManger.login(id,password);
+    //____Phase 2_____
+    /*cout << "=== Bank System - Admin Testing.... login  ===\n\n";
+    Admin admin(1, "Fatma", "789", 600);
+    Client clnt(2, "Fatma", "789", 6000);
+    Employee emp(3, "Fatma", "789", 600);
+
+    admin.addClient(clnt);
+    admin.addClient(clnt);
+
+    admin.addEmployee(emp);
+    admin.addEmployee(emp);
+
+    admin.listClients();
+    admin.listEmployees();
+    cout << "=== Bank System -   Testing FileManger....   ===\n\n";
+    FileManager fileManager;
+    fileManager.addClient(clnt);
+    fileManager.addEmployee(emp);*/
     //           ======testing the client manager login======
     //            ======= phase 3 =======             
     int id;
@@ -58,6 +86,7 @@ int main() {
 //
 //    DataInitializer::initializeData();
 
+ 
     //___Phase 1_____
     //cout << "=== Bank System - Validation Testing ===\n\n";
 
