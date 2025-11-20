@@ -1,5 +1,17 @@
 #include "clientManager.h"
+#include "Client.h"
+#include "Employee.h"
+#include "Admin.h"
+#include "FileManager.h"
+Client* ClientManager::loginClient = nullptr;
 
+ClientManager::ClientManager() {
+    loginClient = nullptr;
+}
+
+ClientManager::~ClientManager() {
+    delete loginClient;
+}
 //c.static Client* login(int id, string password)
 // Login a client by ID and password
 Client* ClientManager::login(int id, string password) {
@@ -37,7 +49,7 @@ bool ClientManager::clientOptions(Client* client) {
             cout << "Enter amount to deposit: ";
             cin >> amount;
             client->deposit(amount);
-            FilesHelper::updateClientInFile(client);
+            //FilesHelper::updateClientInFile(client);
             cout << "New balance: " << client->checkBalance() << endl;
             break;
         }
@@ -46,7 +58,7 @@ bool ClientManager::clientOptions(Client* client) {
             cout << "Enter amount to withdraw: ";
             cin >> amount;
             client->withdraw(amount);
-            FilesHelper::updateClientInFile(client);
+            //FilesHelper::updateClientInFile(client);
             cout << "New balance: " << client->checkBalance() << endl;
             break;
         }
@@ -73,8 +85,8 @@ bool ClientManager::clientOptions(Client* client) {
                 client->transferTo(transferAmount, *recipient);
 
                 // Save both clients permanently
-                FilesHelper::updateClientInFile(client);
-                FilesHelper::updateClientInFile(recipient);
+                //FilesHelper::updateClientInFile(client);
+                //FilesHelper::updateClientInFile(recipient);
 
                 delete recipient; 
             }
@@ -108,3 +120,30 @@ bool ClientManager::clientOptions(Client* client) {
 
     return false;
 }
+
+
+void ClientManager::printClientMenu() {
+    cout << "\n===================================================================================================================" << endl;
+    cout << "                                                CLIENT DASHBOARD                                                  " << endl;
+    cout << "====================================================================================================================" << endl;
+    cout << endl;
+    cout << "  +------------------------+  +--------------------------+  +----------------------------+  +------------------------+ " << endl;
+    cout << "  |  [1]   Your Balance    |  |  [2]  Deposit            |  |  [3]  Withdraw             |  |    [4]  Transfer To    | " << endl;
+    cout << "  +------------------------+  +--------------------------+  +----------------------------+  +------------------------+ " << endl;
+    cout << endl;
+    cout << "  +------------------------+  +--------------------------+  +----------------------------+" << endl;
+    cout << "  |   [5]  Display My Info |  |  [6]  Update My Password |  |   [7]  Logout              |" << endl;
+    cout << "  +------------------------+  +--------------------------+  +----------------------------+" << endl;
+    cout << endl;
+    cout << "====================================================================================================================" << endl;
+    cout << ">> Enter your choice: ";
+}
+
+
+void ClientManager::updatePassword() {
+    string newPassword;
+    cout << "new password: ";
+    cin >> newPassword;
+    loginClient->updatePassword(loginClient->getId(), loginClient->getPassword(), newPassword);
+}
+

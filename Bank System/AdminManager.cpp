@@ -1,4 +1,5 @@
 #include "AdminManager.h"
+#include "Client.h"
 
 void AdminManager::printEmployeeMenu() {
     cout << "\n========== Admin Menu ==========" << endl;

@@ -1,29 +1,19 @@
 // Bank System.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
-#include <iostream>
-#include "Validation.h"
-#include "Client.h"
-#include "Parser.h"
-#include "FilesHelper.h"
-#include "FileManager.h"
-#include "EmployeeManager.h"
-#include "ClientManager.cpp"
-#include "Screen.h"
-using namespace std;
+ 
 
 
 
 int main() {
     //_____Phase 3______
-    int id;
+  /*  int id;
     string password;
     cout << "Id: ";
     cin >> id;
     cout << "password: ";
     cin >> password;
     EmployeeManager empManger;
-    empManger.login(id,password);
+    empManger.login(id,password);*/
     //____Phase 2_____
     /*cout << "=== Bank System - Admin Testing.... login  ===\n\n";
     Admin admin(1, "Fatma", "789", 600);
@@ -44,7 +34,7 @@ int main() {
     fileManager.addEmployee(emp);*/
     //           ======testing the client manager login======
     //            ======= phase 3 =======             
-    int id;
+   /* int id;
     string password;
 
     cout << "===== Client Login =====" << endl;
@@ -56,16 +46,8 @@ int main() {
     Client* loggedClient = ClientManager::login(id, password);
     if (loggedClient) {
         ClientManager::clientOptions(loggedClient);
-    }
-
-    return 0;
-}
-
-
-
-//==============================================================================
-//int main() {
-//    //____Phase 2_____
+    }*/
+    //    //____Phase 2_____
 //    cout << "=== Bank System - Admin Testing.... login  ===\n\n";
 //    Admin admin(1, "Fatma", "789", 600);
 //    Client clnt(2, "Fatma", "789", 6000);
@@ -86,7 +68,7 @@ int main() {
 //
 //    DataInitializer::initializeData();
 
- 
+
     //___Phase 1_____
     //cout << "=== Bank System - Validation Testing ===\n\n";
 
@@ -249,3 +231,5 @@ int main() {
     //}
     return 0;
 }
+
+ 

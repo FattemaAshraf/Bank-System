@@ -128,9 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="AdminManager.cpp" />
     <ClCompile Include="Bank System.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="ClientManger.cpp" />
+    <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="DataSourceInterface.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="EmployeeManager.cpp" />
@@ -138,12 +139,14 @@
     <ClCompile Include="FilesHelper.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Validation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
+    <ClInclude Include="AdminManager.h" />
     <ClInclude Include="Client.h" />
-    <ClInclude Include="ClientManger.h" />
+    <ClInclude Include="ClientManager.h" />
     <ClInclude Include="DataSourceInterface.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="EmployeeManager.h" />
@@ -152,6 +155,7 @@
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="Validation.h" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +168,9 @@
     <Text Include="Client_Last_ID.txt" />
     <Text Include="Employees.txt" />
     <Text Include="Employee_Last_ID.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bank System.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

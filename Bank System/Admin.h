@@ -1,5 +1,8 @@
 #pragma once
 #include "Employee.h"
+#include <iostream>  
+using namespace std;
+
 class Admin : public Employee {
     static vector<Employee> allEmployees;
 

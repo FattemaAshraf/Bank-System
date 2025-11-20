@@ -1,8 +1,8 @@
 #pragma once
-#include <iostream>
+#include "Person.h"
+#include "Client.h"  
 #include <vector>
 #include <string>
-#include <sstream>
 
 using namespace std;
 
