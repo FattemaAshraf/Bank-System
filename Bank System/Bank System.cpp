@@ -9,6 +9,7 @@
 #include "FileManager.h"
 #include "EmployeeManager.h"
 #include "ClientManager.cpp"
+#include "clientManager.cpp"
 #include "Screen.h"
 using namespace std;
 
@@ -42,6 +43,9 @@ int main() {
     FileManager fileManager;
     fileManager.addClient(clnt);
     fileManager.addEmployee(emp);*/
+    
+    //============================================================================================
+    
     //           ======testing the client manager login======
     //            ======= phase 3 =======             
     int id;
