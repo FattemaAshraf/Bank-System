@@ -65,7 +65,8 @@ public:
         cout << "Name: " << name << endl;
         cout << "Balance: " << balance << endl;
     }
- 
+    void updatePassword(int id, string oldPassword, string newPassword);
+
 };
 
 
