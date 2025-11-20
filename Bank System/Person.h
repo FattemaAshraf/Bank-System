@@ -13,6 +13,7 @@ protected:
 public:
     Person();
     Person(int id, string name, string password);
+    virtual ~Person();
 
     int getId();
     string getName();

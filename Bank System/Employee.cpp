@@ -23,6 +23,9 @@ Employee::Employee() : Person() {
     }
 }
 
+ Employee::~Employee() {
+}
+
  void Employee::setSalary(double s) {
     try {
         Validation::validateSalary(s);

@@ -13,6 +13,8 @@ public:
     Admin(int id, string name, string password, double salary)
         : Employee(id, name, password, salary) {}
 
+    virtual ~Admin();
+
 
     static void addEmployee(const Employee& employee);
     static Employee* getEmpById(int id);

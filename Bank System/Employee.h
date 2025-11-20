@@ -16,6 +16,7 @@ protected:
 public:
     Employee();
     Employee(int id, string name, string password, double salary);
+    virtual ~Employee();
 
     void setSalary(double s);
     double getSalary();
