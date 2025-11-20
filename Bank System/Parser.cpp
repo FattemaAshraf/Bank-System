@@ -23,7 +23,7 @@ Client Parser::parseToClient(string line) {
     double balance = 0.0;
 
     for (const string& pair : pairs) {
-        cout << pair << endl;
+        //cout << pair << endl; //remove this line bec, it prints every key-value for every client
         vector<string> keyValue = split(pair, ':');
 
         if (keyValue.size() != 2) {
