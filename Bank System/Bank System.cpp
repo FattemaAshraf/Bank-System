@@ -7,29 +7,56 @@
 #include "Parser.h"
 #include "FilesHelper.h"
 #include "FileManager.h"
+#include "ClientManager.cpp"
+#include "Screen.h"
 using namespace std;
 
+
+
 int main() {
-    //____Phase 2_____
-    cout << "=== Bank System - Admin Testing.... login  ===\n\n";
-    Admin admin(1, "Fatma", "789", 600);
-    Client clnt(2, "Fatma", "789", 6000);
-    Employee emp(3, "Fatma", "789", 600);
+    //           ======testing the client manager login======
+    //            ======= phase 3 =======             
+    int id;
+    string password;
 
-    admin.addClient(clnt);
-    admin.addClient(clnt);
+    cout << "===== Client Login =====" << endl;
+    cout << "Enter your ID: ";
+    cin >> id;
+    cout << "Enter your password: ";
+    cin >> password;
 
-    admin.addEmployee(emp);
-    admin.addEmployee(emp);
+    Client* loggedClient = ClientManager::login(id, password);
+    if (loggedClient) {
+        ClientManager::clientOptions(loggedClient);
+    }
 
-    admin.listClients();
-    admin.listEmployees();
-    cout << "=== Bank System -   Testing FileManger....   ===\n\n";
-    FileManager fileManager;
-    fileManager.addClient(clnt);
-    fileManager.addEmployee(emp);
+    return 0;
+}
 
-    DataInitializer::initializeData();
+
+
+//==============================================================================
+//int main() {
+//    //____Phase 2_____
+//    cout << "=== Bank System - Admin Testing.... login  ===\n\n";
+//    Admin admin(1, "Fatma", "789", 600);
+//    Client clnt(2, "Fatma", "789", 6000);
+//    Employee emp(3, "Fatma", "789", 600);
+//
+//    admin.addClient(clnt);
+//    admin.addClient(clnt);
+//
+//    admin.addEmployee(emp);
+//    admin.addEmployee(emp);
+//
+//    admin.listClients();
+//    admin.listEmployees();
+//    cout << "=== Bank System -   Testing FileManger....   ===\n\n";
+//    FileManager fileManager;
+//    fileManager.addClient(clnt);
+//    fileManager.addEmployee(emp);
+//
+//    DataInitializer::initializeData();
 
     //___Phase 1_____
     //cout << "=== Bank System - Validation Testing ===\n\n";
