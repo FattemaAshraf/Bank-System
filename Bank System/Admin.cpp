@@ -4,6 +4,9 @@
 
 vector<Employee> Admin::allEmployees;
 
+Admin::~Admin() {
+}
+
 void Admin::addEmployee(const Employee& employee) {
     allEmployees.push_back(employee);
 }

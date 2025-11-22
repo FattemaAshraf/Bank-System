@@ -137,9 +137,11 @@ Employee* EmployeeManager::loginEmployee = nullptr;
     for (int i = 0; i < allEmployees.size(); i++) {
         if (allEmployees[i].getId() == id && allEmployees[i].getPassword() == password) {
             cout << "\nWelcome: " << allEmployees[i].getName() << endl;
-            setLoginEmp(&allEmployees[i]);
+            Employee* emp = new Employee(allEmployees[i].getId(), allEmployees[i].getName(),
+                allEmployees[i].getPassword(), allEmployees[i].getSalary());
+            setLoginEmp(emp);
             printEmployeeMenu();
-            return &allEmployees[i];
+            return emp;
         }
     }
     return nullptr;

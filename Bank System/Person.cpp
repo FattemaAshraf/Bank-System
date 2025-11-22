@@ -13,6 +13,9 @@
     this->password = password;
 }
 
+ Person::~Person() {
+}
+
  int Person::getId() {
     return id;
 }
