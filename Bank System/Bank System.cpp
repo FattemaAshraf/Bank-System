@@ -4,8 +4,10 @@
 
 
 
+#include "Screens.h"
 int main() {
     //_____Phase 3______
+    Screens::runApp();
   /*  int id;
     string password;
     cout << "Id: ";

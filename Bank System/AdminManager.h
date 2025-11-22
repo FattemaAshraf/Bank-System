@@ -11,4 +11,6 @@ public:
     static void printEmployeeMenu();
     static Admin* login(int id, string password);
     static bool AdminOptions(Admin* admin);
+    static void logOut(Admin* admin);
+    static void setLoginAdmin(Admin* admin);
 };

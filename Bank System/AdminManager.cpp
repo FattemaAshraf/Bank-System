@@ -1,5 +1,6 @@
-#include "AdminManager.h"
+ #include "AdminManager.h"
 #include "Client.h"
+#include "FileManager.h"
 
 void AdminManager::printEmployeeMenu() {
     cout << "\n========== Admin Menu ==========" << endl;
@@ -24,8 +25,10 @@ Admin* AdminManager::login(int id, string password) {
     for (int i = 0; i < admins.size(); i++) {
         if (admins[i].getId() == id && admins[i].getPassword() == password) {
             cout << "Login successful! Welcome " << admins[i].getName() << endl;
-            return new Admin(admins[i].getId(), admins[i].getName(),
-                           admins[i].getPassword(), admins[i].getSalary());
+            Admin* admin = new Admin(admins[i].getId(), admins[i].getName(),
+                admins[i].getPassword(), admins[i].getSalary());
+            setLoginAdmin(admin);
+            return admin;
         }
     }
 
@@ -46,16 +49,16 @@ bool AdminManager::AdminOptions(Admin* admin) {
     }
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+  
     switch (choice) {
         case 1: {
-            int id;
+            int id = FilesHelper::getLast(CLIENT_LAST_ID_FILE) + 1;
+            double  balance;
             string name, password;
-            double balance;
-
+ 
             cout << "\n--- Add New Client ---" << endl;
-            cout << "Enter Client ID: ";
-            cin >> id;
+            cout << "Id: " << id << " [read Only]";
+
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             cout << "Enter Name: ";
@@ -81,6 +84,7 @@ bool AdminManager::AdminOptions(Admin* admin) {
         }
 
         case 2: {
+           
             admin->listClients();
             break;
         }
@@ -125,13 +129,15 @@ bool AdminManager::AdminOptions(Admin* admin) {
         }
 
         case 5: {
-            int id;
+            int id = FilesHelper::getLast(EMPLOYEE_LAST_ID_FILE) + 1;
+
             string name, password;
             double salary;
 
             cout << "\n--- Add New Employee ---" << endl;
-            cout << "Enter Employee ID: ";
-            cin >> id;
+            cout << "Id: " << id << " [read Only]";
+
+
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             cout << "Enter Name: ";
@@ -213,6 +219,7 @@ bool AdminManager::AdminOptions(Admin* admin) {
             try {
                 admin->setPassword(newPassword);
                 cout << "Password updated successfully!" << endl;
+                FilesHelper::updateAdminInFile(admin);
             }
             catch (const invalid_argument& e) {
                 cout << "Error: " << e.what() << endl;
@@ -221,7 +228,7 @@ bool AdminManager::AdminOptions(Admin* admin) {
         }
 
         case 0: {
-            cout << "Logging out..." << endl;
+            logOut(admin);
             return false;
         }
 
@@ -232,4 +239,29 @@ bool AdminManager::AdminOptions(Admin* admin) {
     }
 
     return true;
+}
+
+void AdminManager::logOut(Admin* admin) {
+    FileManager fileManger;
+    fileManger.removeAllClients();
+    for (int i = 0; i < admin->getAllClients().size(); i++) {
+        fileManger.addClient(admin->getAllClients()[i]);
+    }
+    fileManger.removeAllEmployees();
+    for (int i = 0; i < admin->getAllEmployees().size(); i++) {
+        fileManger.addEmployee(admin->getAllEmployees()[i]);
+    }
+    cout << "\nLogging out ... Goodbye!" << admin->getName() << endl;
+}
+
+void AdminManager::setLoginAdmin(Admin* admin) {
+    FileManager fileManager;
+    vector<Client> clients = fileManager.getAllClients();
+    for (Client& client : clients) {
+        admin->addClient(client);
+    }
+    vector<Employee> emps = fileManager.getAllEmployees();
+    for (Employee& Employee : emps) {
+        admin->addEmployee(Employee);
+    }
 }

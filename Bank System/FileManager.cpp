@@ -3,14 +3,17 @@
 
  void FileManager::addClient(Client& obj) {
     FilesHelper::saveClient(obj);
+
 }
 
  void FileManager::addEmployee(Employee& obj) {
     FilesHelper::saveEmployee(obj);
+
 }
 
  void FileManager::addAdmin(Admin& obj) {
     FilesHelper::saveAdmin(obj);
+
 }
 
  vector<Client> FileManager::getAllClients() {

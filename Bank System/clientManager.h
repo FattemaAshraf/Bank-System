@@ -14,7 +14,10 @@ public:
 public:
     static Client* login(int id, string password);
     static bool clientOptions(Client* c);
-  
+    static void logOut();
+
     static void printClientMenu();
     static void updatePassword();
+    static void setLoginClient(Client* emp);
+
 };

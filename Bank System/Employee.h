@@ -24,11 +24,11 @@ public:
     virtual void display();
     void displayEmp();
 
-    void addClient(const Client& client);
+    Client& addClient( Client& client);
     Client* getClientById(int id);
     vector<Client>& getAllClients();
     void listClients();
     void editClient(int id, string name, string password, double balance);
-    void updatePassword(int id, string oldPassword, string newPassword);
+    void updatePassword(Employee& employee, string& newPassword);
 };
 

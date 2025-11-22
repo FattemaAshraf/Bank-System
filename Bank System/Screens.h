@@ -12,5 +12,6 @@ public:
     static void invalid(int c);
     static void logout();
     static void loginScreen(int c);
+    static void invalidLoginScreen(int loginAs);
     static void runApp();
 };

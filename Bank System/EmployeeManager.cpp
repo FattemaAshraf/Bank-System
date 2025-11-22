@@ -2,6 +2,7 @@
 #include "Client.h"
 #include "Admin.h"
 #include "FileManager.h"
+#include "FilesHelper.h"
 
 Employee* EmployeeManager::loginEmployee = nullptr;
 
@@ -67,7 +68,8 @@ Employee* EmployeeManager::loginEmployee = nullptr;
         updatePassword();
         break;
     case 7:
-        cout << "\nLogging out... Goodbye!" << endl;
+        logOut();
+
         return false;  
     default:
         cout << "Invalid choice. Please try again." << endl;
@@ -76,20 +78,30 @@ Employee* EmployeeManager::loginEmployee = nullptr;
 
     return true;  
 }
-
+ void EmployeeManager::logOut() {
+      FileManager fileManger;
+        fileManger.removeAllClients();
+        for (int i = 0; i < loginEmployee->getAllClients().size(); i++) {
+            fileManger.addClient(loginEmployee->getAllClients()[i]);
+        }
+        cout << "\nLogging out ... Goodbye!" << loginEmployee->getName() << endl;
+ }
  void EmployeeManager::newClient() {
-    int id, balance;
+    int id = FilesHelper::getLast(CLIENT_LAST_ID_FILE) +1;
+    double  balance;
     string name, password;
-    cout << "Id: ";
-    cin >> id;
-    cout << "name: ";
+    cout << "Id: " << id << " [read Only]";
+    //cin >> id;
+    cout << "\nname: ";
     cin >> name;
     cout << "password: ";
     cin >> password;
     cout << "balance: ";
     cin >> balance;
     Client client(id, name, password, balance);
-    loginEmployee->addClient(client);
+    client = loginEmployee->addClient(client);
+    FileManager fileManger;
+    fileManger.addClient(client);
 }
 
  void EmployeeManager::searchForClient() {
@@ -102,9 +114,9 @@ Employee* EmployeeManager::loginEmployee = nullptr;
     }
     else {
         cout << "Client not found." << endl;
-    }
+     }
 }
-
+ 
  void EmployeeManager::listAllClients() {
     loginEmployee->listClients();
 }
@@ -127,7 +139,7 @@ Employee* EmployeeManager::loginEmployee = nullptr;
     string newPassword;
     cout << "new password: ";
     cin >> newPassword;
-    loginEmployee->updatePassword(loginEmployee->getId(), loginEmployee->getPassword(), newPassword);
+    loginEmployee->updatePassword(*loginEmployee, newPassword);
 }
 
  Employee* EmployeeManager::login(int id, string password) {
@@ -140,7 +152,7 @@ Employee* EmployeeManager::loginEmployee = nullptr;
             Employee* emp = new Employee(allEmployees[i].getId(), allEmployees[i].getName(),
                 allEmployees[i].getPassword(), allEmployees[i].getSalary());
             setLoginEmp(emp);
-            printEmployeeMenu();
+           
             return emp;
         }
     }

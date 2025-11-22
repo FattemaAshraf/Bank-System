@@ -24,7 +24,8 @@ Employee::Employee() : Person() {
 }
 
  Employee::~Employee() {
-}
+    
+ }
 
  void Employee::setSalary(double s) {
     try {
@@ -53,9 +54,11 @@ Employee::Employee() : Person() {
     display();
 }
 
-void Employee::addClient(const Client& client) {
+ Client& Employee::addClient( Client& client) {
      
     allClients.push_back(client);
+    return client;
+   
 }
 
 Client* Employee::getClientById(int id) {
@@ -100,42 +103,40 @@ void Employee::editClient(int id, string name, string password, double balance) 
         client->setName(name);
         client->setPassword(password);
         client->setBalance(balance);
-
+       
         cout << "Client updated successfully." << endl;
     }
     catch (const invalid_argument& e) {
         cout << "Error: " << e.what() << endl;
     }
 }
-void Employee::updatePassword(int id, string oldPassword, string newPassword) {
-    FileManager fileManager;
-    vector<Employee> allEmployees = fileManager.getAllEmployees();
-    Employee* employee = nullptr;   
-
-    for (int i = 0; i < allEmployees.size(); i++) {
-        if (allEmployees[i].getId() == id && allEmployees[i].getPassword() == oldPassword) {  
-            employee = &allEmployees[i];
-            break;  
-        }
-    }
-
-    if (employee == nullptr) {
-        cout << "Employee not found." << endl;
+void Employee::updatePassword(Employee& employee,  string& newPassword) {
+     
+    if (employee.getPassword() == newPassword) {
+        cout << "New password cannot be the same as old password." << endl;
         return;
     }
-    if (oldPassword == newPassword) {
-        cout << "same password." << endl;
-        return;
-    }
+
     try {
         Validation::validatePassword(newPassword);
-        employee->setPassword(newPassword);  
-        cout << "Employee password updated successfully." << endl;
-        fileManager.removeAllEmployees();
+        employee.setPassword(newPassword);
+
+         FileManager fileManager;
+        vector<Employee> allEmployees = fileManager.getAllEmployees();
+
+        for (int i = 0; i < allEmployees.size(); i++) {
+            if (allEmployees[i].getId() == employee.getId()) {
+                allEmployees[i].setPassword(newPassword);
+                break;
+            }
+        }
+
+         fileManager.removeAllEmployees();
         for (int i = 0; i < allEmployees.size(); i++) {
             fileManager.addEmployee(allEmployees[i]);
         }
 
+        cout << "Password updated successfully." << endl;
     }
     catch (const invalid_argument& e) {
         cout << "Error: " << e.what() << endl;

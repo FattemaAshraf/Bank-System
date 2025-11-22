@@ -68,25 +68,67 @@ void Screens::loginScreen(int c) {
     if (c == 1) {
         Client* client = ClientManager::login(id, password);
         if (client) {
-            ClientManager::clientOptions(client);
+           
+            while (ClientManager::clientOptions(client)) {
+
+            };
+            logout();
             delete client;
+        }
+        else {
+            invalidLoginScreen(c);
         }
     }
     else if (c == 2) {
         Employee* employee = EmployeeManager::login(id, password);
         if (employee) {
-            EmployeeManager::employeeOptions(employee);
+            while (EmployeeManager::employeeOptions(employee)) {
+
+            };
+            logout();
             delete employee;
+        }
+        else {
+            invalidLoginScreen(c);
         }
     }
     else if (c == 3) {
         Admin* admin = AdminManager::login(id, password);
         if (admin) {
-            AdminManager::AdminOptions(admin);
+            while (AdminManager::AdminOptions(admin)) {
+
+            };
+            logout();
+             
             delete admin;
+        }
+        else {
+            invalidLoginScreen(c);
         }
     }
 }
+void Screens::invalidLoginScreen(int loginAs) {
+    cout << "\nInvalid Password or id" << endl;
+    cout << "  [1] Try again" << endl;
+    cout << "  [2] Back to Home" << endl;
+    cout << "  [0] Exit" << endl;
+    int choice;
+    cout << ">> Enter your choice: ";
+    cin >> choice;
+    if (choice < 0 || choice >2) {
+        invalid(choice);
+        return;
+    }
+    if (choice == 2) {
+        runApp();
+    }
+    else if (choice == 1) {
+        loginScreen(loginAs);
+    }
+    else if (choice ==0) {
+        logout();
+      }
+ }
 
 void Screens::runApp() {
     bankName();

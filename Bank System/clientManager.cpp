@@ -8,7 +8,7 @@ Client* ClientManager::loginClient = nullptr;
 ClientManager::ClientManager() {
     loginClient = nullptr;
 }
-
+ 
 ClientManager::~ClientManager() {
     delete loginClient;
 }
@@ -21,13 +21,15 @@ Client* ClientManager::login(int id, string password) {
         if (clients[i].getId() == id && clients[i].getPassword() == password) {
 
             cout << "\n-----Login successful! Welcome, " << clients[i].getName() << "!----" << endl;
-
-            return new Client(clients[i].getId(), clients[i].getName(),
+            Client* client = new Client(clients[i].getId(), clients[i].getName(),
                 clients[i].getPassword(), clients[i].getBalance());
+            setLoginClient(client);
+
+            return client;
+            
         }
     }
-    cout << "Invalid ID or password." << endl;
-    return nullptr;
+     return nullptr;
 }
 
 
@@ -37,14 +39,21 @@ bool ClientManager::clientOptions(Client* client) {
     if (!client) return false;
 
     int choice;
-    do {
-        cout << "\n===== Client Menu =====\n";
-        cout << "1. Deposit\n2. Withdraw\n3. Transfer\n4. Check Balance\n5. Update Password\n6. Display Info\n0. Logout\n";
-        cout << "Choose an option: ";
+    
+        printClientMenu();
         cin >> choice;
 
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Error: Invalid input. Please enter a number." << endl;
+            return true;
+        }
         switch (choice) {
-        case 1: {
+        case 1:
+            cout << "\n<<<<<<Current balance: " << client->checkBalance() << " >>>>>>>>" << endl;
+            break;
+        case 2: {
             double amount;
             cout << "Enter amount to deposit: ";
             cin >> amount;
@@ -53,7 +62,7 @@ bool ClientManager::clientOptions(Client* client) {
             cout << "New balance: " << client->checkBalance() << endl;
             break;
         }
-        case 2: {
+        case 3: {
             double amount;
             cout << "Enter amount to withdraw: ";
             cin >> amount;
@@ -62,7 +71,7 @@ bool ClientManager::clientOptions(Client* client) {
             cout << "New balance: " << client->checkBalance() << endl;
             break;
         }
-        case 3: { // Transfer
+        case 4: { // Transfer
             int recipientId;
             double transferAmount;
             cout << "Enter recipient ID: ";
@@ -84,9 +93,7 @@ bool ClientManager::clientOptions(Client* client) {
             if (recipient) {
                 client->transferTo(transferAmount, *recipient);
 
-                // Save both clients permanently
-                //FilesHelper::updateClientInFile(client);
-                //FilesHelper::updateClientInFile(recipient);
+                 FilesHelper::updateClientInFile(recipient);
 
                 delete recipient; 
             }
@@ -95,10 +102,8 @@ bool ClientManager::clientOptions(Client* client) {
             }
             break;
         }
-        case 4:
-            cout << "\n<<<<<<Current balance: " << client->checkBalance() << " >>>>>>>>" << endl;
-            break;
-        case 5: {
+        
+        case 6: {
             string newPass;
             cout << "Enter new password: ";
             cin >> newPass;
@@ -106,19 +111,19 @@ bool ClientManager::clientOptions(Client* client) {
             cout << "Password updated successfully!" << endl;
             break;
         }
-        case 6:
+        case 5:
             client->display();
             break;
-        case 0:
-            cout << "Logging out..." << endl;
+        case 7:
+            logOut();
             return false;
         default:
             cout << "Invalid choice. Try again." << endl;
         }
 
-    } while (choice != 0);
+     
 
-    return false;
+    return true;
 }
 
 
@@ -139,11 +144,18 @@ void ClientManager::printClientMenu() {
     cout << ">> Enter your choice: ";
 }
 
+void ClientManager::logOut() {
+    FilesHelper::updateClientInFile(loginClient);
 
+    cout << "\nLogging out ... Goodbye!" << loginClient->getName() << endl;
+}
 void ClientManager::updatePassword() {
     string newPassword;
     cout << "new password: ";
     cin >> newPassword;
     loginClient->updatePassword(loginClient->getId(), loginClient->getPassword(), newPassword);
 }
-
+void ClientManager::setLoginClient(Client* cl) {
+    loginClient = cl;
+    
+}

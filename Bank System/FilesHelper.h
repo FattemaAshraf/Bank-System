@@ -21,4 +21,9 @@ public:
     static vector<Admin> getAdmins();
 
     static void clearFile(string fileName, string lastIdFile);
+    static void  clearLastIdFile (string lastIdFile);
+    static void updateClientInFile(Client* client);
+    static void updateAdminInFile(Admin* admin);
+
+    
 };
